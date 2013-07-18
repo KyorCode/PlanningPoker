@@ -1,5 +1,10 @@
-describe('When I call this node run thingy',function(){
-    it("it should return true",function(){
-      expect(true).toBeTruthy();
+var request = require('http');
+
+describe('When the root is called',function(){
+    it('should return 200',function(done){
+        request.get("http://localhost:35728",function(response){
+            expect(response.statusCode).toBe(200);
+            done();
+        })
     });
-});
+})
