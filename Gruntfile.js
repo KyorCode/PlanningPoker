@@ -6,8 +6,8 @@ module.exports = function (grunt) {
     grunt.initConfig({
             pkg: grunt.file.readJSON('package.json'),
             concurrent: {
-                target: {
-                    tasks: ['nodemon:dev', 'watch'],
+                server: {
+                    tasks: ['nodemon:dev', 'watch', 'jasmine_node'],
                     options: {
                         logConcurrentOutput: true
                     }
@@ -122,6 +122,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-jasmine-node');
     grunt.loadNpmTasks('grunt-markdown');
 
-    grunt.registerTask('default', ['jasmine_node', 'jasmine:appRun', 'less:dev', 'jshint:all', 'markdown', 'concurrent:target']);
+    grunt.registerTask('default', [ 'jasmine:appRun', 'less:dev', 'jshint:all', 'markdown', 'concurrent']);
 }
 ;
