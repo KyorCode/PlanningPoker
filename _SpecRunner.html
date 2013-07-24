@@ -37,10 +37,8 @@
 
     
       require.config({
-  "baseUrl": "./js/libs",
-  "paths": {
-    "app": "../app"
-  }
+  "urlArgs": "bust=1374610563715",
+  "baseUrl": "./public/js/app"
 });
     
   </script>
@@ -51,7 +49,7 @@
       
     ],
     function(){
-      require(['spec/appRun/appSpec.js','.grunt/grunt-contrib-jasmine/reporter.js'], function(){
+      require(['spec/appRun/module.loginSpec.js','.grunt/grunt-contrib-jasmine/reporter.js'], function(){
         require(['.grunt/grunt-contrib-jasmine/jasmine-helper.js'], function(){
           // good to go! Our tests should already be running.
         })

@@ -2,10 +2,7 @@ PlanningPoker = (function () {
     var root = this;
 
     requirejs.config({
-        baseUrl: './js/libs',
-        paths: {
-            "app": '../app'
-        }
+        baseUrl: './js/app'
     });
 
     function defineLibraries() {
@@ -15,7 +12,7 @@ PlanningPoker = (function () {
     }
 
     function boot() {
-        require(["app/bootstrap"], function (bs) {
+        require(["bootstrap"], function (bs) {
             bs.run();
         });
     }

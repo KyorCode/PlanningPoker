@@ -71,7 +71,7 @@ module.exports = function (grunt) {
             },
             jasmine: {
                 appRun: {
-                    src: '../public/js/main.js',
+                    src: ['.public/js/main.js','.public/js/app/*.js'],
                     options: {
                         keepRunner: true,
                         specs: 'spec/appRun/*Spec.js',
@@ -80,18 +80,15 @@ module.exports = function (grunt) {
                         template: require('grunt-template-jasmine-requirejs'),
                         templateOptions: {
                             requireConfig: {
-                                baseUrl: './js/libs',
-                                paths: {
-                                    "app": '../app'
-                                }
+                                urlArgs:"bust=" + (new Date()).getTime(),
+                                baseUrl: './public/js/app'
                             }
                         }
                     }
                 }
             },
             jasmine_node: {
-                specNameMatcher: 'NodeSpec',
-                forceExit: true
+                specNameMatcher: 'NodeSpec'
             },
             markdown: {
                 all: {
