@@ -2,14 +2,14 @@ PlanningPoker = (function () {
     var root = this;
 
     requirejs.config({
-        baseUrl: './js/app'
-    });
+        baseUrl: './js/app',
+        paths:{
+            'amplify':'.libs/amplifylib/amplify.js'
+        },
+        shim:{
 
-    function defineLibraries() {
-        define('amplify', [], function () {
-            return root.amplify;
-        });
-    }
+        }
+    });
 
     function boot() {
         require(["bootstrap"], function (bs) {
@@ -17,6 +17,5 @@ PlanningPoker = (function () {
         });
     }
 
-    defineLibraries();
     boot();
 }());

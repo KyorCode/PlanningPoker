@@ -10,14 +10,19 @@ describe('Login module', function () {
         spyOn(requestStub, 'define');
         define('amplify', [], amplifyStub);
 
-        define(['module.login'], function (loginModule) {
-            console.log(loginModule);
-            readyLoginModule = loginModule;
+        define(['Squire'],function(Squire){
+            var injector = new Squire();
+
+            injector.require(['module.login'],function(module){
+               console.log(module);
+            },function(err){
+                console.log(err);
+            });
         });
     });
 
-    it('should have been specified',function(){
-       expect(require.specified('module.login')).toBeTruthy();
+    it('should have been specified', function () {
+        expect(require.specified('module.login')).toBeTruthy();
     });
 
     it('should initialize amplify requests', function () {

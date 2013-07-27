@@ -71,7 +71,7 @@ module.exports = function (grunt) {
             },
             jasmine: {
                 appRun: {
-                    src: ['.public/js/main.js','.public/js/app/*.js'],
+                    src: ['.public/js/app/*.js'],
                     options: {
                         keepRunner: true,
                         specs: 'spec/appRun/*Spec.js',
@@ -79,10 +79,7 @@ module.exports = function (grunt) {
                         styles: 'public/css/styles.css',
                         template: require('grunt-template-jasmine-requirejs'),
                         templateOptions: {
-                            requireConfig: {
-                                urlArgs:"bust=" + (new Date()).getTime(),
-                                baseUrl: './public/js/app'
-                            }
+                            requireConfigFile:'spec/requireConfig.js'
                         }
                     }
                 }
