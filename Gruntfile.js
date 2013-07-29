@@ -1,8 +1,6 @@
 module.exports = function (grunt) {
     "use strict";
 
-    //TODO: Split tasks up for each type , less, js, html
-
     grunt.initConfig({
             pkg: grunt.file.readJSON('package.json'),
             concurrent: {
@@ -14,7 +12,28 @@ module.exports = function (grunt) {
                 }
             },
             jshint: {
-                all: ['Gruntfile.js', 'app.js', 'public/js/*.js', 'spec/**/*.js']
+                all: ['Gruntfile.js', 'app.js', 'public/js/*.js', 'spec/**/*.js'],
+                options: {
+                    curly: true,
+                    eqeqeq: true,
+                    immed: true,
+                    latedef: true,
+                    newcap: true,
+                    noarg: true,
+                    sub: true,
+                    undef: true,
+                    boss: true,
+                    eqnull: true,
+                    browser: true
+                },
+                globals: {
+                    require: true,
+                    define: true,
+                    requirejs: true,
+                    describe: true,
+                    expect: true,
+                    it: true
+                }
             },
             less: {
                 dev: {
@@ -71,16 +90,17 @@ module.exports = function (grunt) {
             },
             jasmine: {
                 appRun: {
-                    src: ['.public/js/app/*.js'],
+                    src: ['public/js/app/*.js'],
                     options: {
                         keepRunner: true,
                         specs: 'spec/appRun/*Spec.js',
                         helpers: 'spec/Helpers/*Helper.js',
                         styles: 'public/css/styles.css',
+                        vendor: ['public/js/libs/jquery/jquery.js', 'public/js/libs/amplify/lib/amplify.js'],
                         template: require('grunt-template-jasmine-requirejs'),
                         templateOptions: {
-                            requireConfigFile:'spec/requireConfig.js'
-                        }
+                            requireConfigFile: 'spec/requireConfig.js'
+                            }
                     }
                 }
             },

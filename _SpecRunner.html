@@ -30,6 +30,10 @@
   
   <script src=".grunt/grunt-contrib-jasmine/jasmine-html.js"></script>
   
+  <script src="public/js/libs/jquery/jquery.js"></script>
+  
+  <script src="public/js/libs/amplify/lib/amplify.js"></script>
+  
   
 
   <script>
@@ -37,11 +41,22 @@
 
     
       require.config({
-  "urlArgs": "bust=1374935226105",
+  "urlArgs": "bust=1375092305831",
   "baseUrl": "public/js/app",
   "paths": {
-    "Squire": "public/js/libs/Squire.js/src/Squire.js"
-  }
+    "Squire": "../libs/squire/src/Squire"
+  },
+  "callback": function anonymous() {
+
+        define('jquery', [], function () {
+            return window.jQuery;
+        });
+        define('amplify', [], function () {
+            return window.amplify;
+        });
+    
+launchTest();
+}
 });
     
   </script>
@@ -49,6 +64,12 @@
   <script>
     function launchTest() {
     require([
+      
+        
+        'bootstrap' ,
+      
+        
+        'module.login' 
       
     ],
     function(){
@@ -62,10 +83,6 @@
   }
   </script>
 
-  
-  <script>
-  launchTest();
-  </script>
   
 </head>
 <body>

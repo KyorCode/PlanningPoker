@@ -1,31 +1,31 @@
-describe('Login module', function () {
-    var amplifyStub, requestStub, readyLoginModule = null;
+define(['Squire', 'amplify'], function (Squire, amplify) {
+    var injector = new Squire();
+    debugger;
 
-    beforeEach(function () {
-        requestStub = { define: function (sourceId, requesttype, hashsettings) {
-        }};
+    describe('Login module', function () {
+        describe('required', function () {
+            it('should have been specified', function () {
+                expect(require.specified('module.login')).toBeTruthy();
+            });
 
-        amplifyStub = { request: requestStub};
-
-        spyOn(requestStub, 'define');
-        define('amplify', [], amplifyStub);
-
-        define(['Squire'],function(Squire){
-            var injector = new Squire();
-
-            injector.require(['module.login'],function(module){
-               console.log(module);
-            },function(err){
-                console.log(err);
+            it('should require have required the login module', function () {
+                var squire = new Squire();
+                squire.require(['login.module'], function (module) {
+                    expect(module).toBeDefined();
+                    done();
+                });
             });
         });
-    });
 
-    it('should have been specified', function () {
-        expect(require.specified('module.login')).toBeTruthy();
-    });
-
-    it('should initialize amplify requests', function () {
-        expect(requestStub.define).toHaveBeenCalled();
+        describe('init', function () {
+            it ('should initialize the amplify requests', function () {
+                spyOn(amplify.request, 'define');
+                var squire = new Squire();
+                squire.require(['login.module'], function (module) {
+                    expect(amplify.request.define).toHaveBeenCalled();
+                    done();
+                });
+            }) ;
+        });
     });
 });

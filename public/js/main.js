@@ -4,10 +4,11 @@ PlanningPoker = (function () {
     requirejs.config({
         baseUrl: './js/app',
         paths:{
-            'amplify':'.libs/amplifylib/amplify.js'
+            'amplify':'.libs/amplify/lib/amplify',
+            'jquery':'.libs/jquery/jquery'
         },
         shim:{
-
+            'amplify':['jquery']
         }
     });
 
