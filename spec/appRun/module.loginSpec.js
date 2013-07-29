@@ -1,6 +1,5 @@
 define(['Squire', 'amplify'], function (Squire, amplify) {
     var injector = new Squire();
-    debugger;
 
     describe('Login module', function () {
         describe('required', function () {
@@ -10,9 +9,8 @@ define(['Squire', 'amplify'], function (Squire, amplify) {
 
             it('should require have required the login module', function () {
                 var squire = new Squire();
-                squire.require(['login.module'], function (module) {
+                squire.require(['module.login'], function (module) {
                     expect(module).toBeDefined();
-                    done();
                 });
             });
         });
@@ -21,9 +19,8 @@ define(['Squire', 'amplify'], function (Squire, amplify) {
             it ('should initialize the amplify requests', function () {
                 spyOn(amplify.request, 'define');
                 var squire = new Squire();
-                squire.require(['login.module'], function (module) {
+                squire.require(['module.login'], function (module) {
                     expect(amplify.request.define).toHaveBeenCalled();
-                    done();
                 });
             }) ;
         });
