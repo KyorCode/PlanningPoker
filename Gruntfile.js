@@ -5,7 +5,7 @@ module.exports = function (grunt) {
             pkg: grunt.file.readJSON('package.json'),
             concurrent: {
                 server: {
-                    tasks: ['nodemon:dev', 'watch', 'jasmine_node'],
+                    tasks: ['nodemon:dev', 'watch'],
                     options: {
                         logConcurrentOutput: true
                     }
@@ -58,7 +58,7 @@ module.exports = function (grunt) {
             watch: {
                 html: {
                     files: ['views/*.html'],
-                    tasks: ['less:dev', 'jshint:all', 'jasmine:appRun'],
+                    tasks: ['less:dev', 'jshint:all'],
                     options: {
                         nospawn: true,
                         livereload: true
@@ -74,38 +74,19 @@ module.exports = function (grunt) {
                 },
                 js: {
                     files: ['public/js/*.js'],
-                    tasks: ['jshint:all', 'jasmine:appRun'],
+                    tasks: ['jshint:all'],
                     options: {
                         nospawn: true,
                         livereload: true
                     }
                 }, tests: {
                     files: ['spec/**/*.js'],
-                    tasks: ['jshint:all', 'jasmine:appRun'],
+                    tasks: ['jshint:all'],
                     options: {
                         nospawn: true,
                         livereload: true
                     }
                 }
-            },
-            jasmine: {
-                appRun: {
-                    src: ['public/js/app/*.js'],
-                    options: {
-                        keepRunner: true,
-                        specs: 'spec/appRun/*Spec.js',
-                        helpers: 'spec/Helpers/*Helper.js',
-                        styles: 'public/css/styles.css',
-                        vendor: ['public/js/libs/jquery/jquery.js', 'public/js/libs/amplify/lib/amplify.js'],
-                        template: require('grunt-template-jasmine-requirejs'),
-                        templateOptions: {
-                            requireConfigFile: 'spec/requireConfig.js'
-                            }
-                    }
-                }
-            },
-            jasmine_node: {
-                specNameMatcher: 'NodeSpec'
             },
             markdown: {
                 all: {
@@ -132,10 +113,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-nodemon');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.loadNpmTasks('grunt-jasmine-node');
     grunt.loadNpmTasks('grunt-markdown');
 
-    grunt.registerTask('default', [ 'jasmine:appRun', 'less:dev', 'jshint:all', 'markdown', 'concurrent']);
+    grunt.registerTask('default', [ 'less:dev', 'jshint:all', 'markdown', 'concurrent']);
 }
 ;
