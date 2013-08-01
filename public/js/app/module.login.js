@@ -1,13 +1,15 @@
 define('module.login', ['amplify'], function (amplify) {
 
-    var init = function () {
-//        amplify.request.define('login', 'ajax', {
-//            url: '/something',
-//            dataType: ' json',
-//            type: 'GET'
-//        })
+    function Login(name){
+        this._name = name;
     };
 
-    init();
+    Login.prototype ={
+        getName: function(){
+           return this._name;
+        }
+    };
+
+    return (Login);
 
 });

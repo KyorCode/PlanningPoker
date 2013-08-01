@@ -12,7 +12,7 @@ module.exports = function (grunt) {
                 }
             },
             jshint: {
-                all: ['Gruntfile.js', 'app.js', 'public/js/*.js', 'spec/**/*.js'],
+                all: ['Gruntfile.js', 'app.js', 'public/js/*.js', 'tests/**/*.js'],
                 options: {
                     curly: true,
                     eqeqeq: true,
@@ -80,7 +80,7 @@ module.exports = function (grunt) {
                         livereload: true
                     }
                 }, tests: {
-                    files: ['spec/**/*.js'],
+                    files: ['tests/**/*.js'],
                     tasks: ['jshint:all'],
                     options: {
                         nospawn: true,
@@ -104,6 +104,26 @@ module.exports = function (grunt) {
                         }
                     }
                 }
+            },
+            mocha: {
+                all: ['tests/**/*.html'],
+                options:{
+                    run:true
+                }
+            },
+            copy: {
+                main: {
+                    files: [
+                        {expand: true, flatten: true, src: ['node_modules/grunt-mocha/node_modules/mocha/mocha.css'], dest: 'tests/css/' },
+                        {expand: true, flatten: true, src: ['node_modules/grunt-mocha/node_modules/mocha/mocha.js'], dest: 'tests/js/' },
+                        {expand: true, flatten: true, src: ['node_modules/chai/chai.js'], dest: 'tests/js/' },
+                        {expand: true, flatten: true, src: ['node_modules/sinon/lib/sinon.js'], dest: 'tests/js/' },
+                        {expand: true, flatten: true, src: ['public/js/libs/requirejs/require.js'], dest: 'tests/js/' },
+                        {expand: true, flatten: true, src: ['public/js/libs/jquery/jquery.js'], dest: 'tests/js/' },
+                        {expand: true, flatten: true, src: ['public/js/libs/amplify/lib/amplify.js'], dest: 'tests/js/' },
+                        {expand: true, flatten:true, src:['node_modules/grunt-mocha/phantomjs/bridge.js'], dest : 'tests/js'}
+                    ]
+                }
             }
         }
     );
@@ -114,7 +134,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-markdown');
+    grunt.loadNpmTasks('grunt-mocha');
+    grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', [ 'less:dev', 'jshint:all', 'markdown', 'concurrent']);
+    grunt.registerTask('default', [ 'less:dev', 'jshint:all', 'copy', 'connect:server', 'mocha', 'markdown', 'concurrent']);
 }
 ;
