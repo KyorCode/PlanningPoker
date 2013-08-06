@@ -4,13 +4,13 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Module.login mocha testst</title>
     <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8"/>
+    <script src="js/mocha.js" type="text/javascript" charset="utf-8"></script>
+
 </head>
 <body>
-<!-- Required for browser reporter -->
 <div id="mocha"></div>
 
 <!-- mocha -->
-<script src="js/mocha.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/require.js" type="text/javascript" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
@@ -22,8 +22,9 @@
             'amplify': '../js/amplify',
             'jquery': '../js/jquery',
             'chai': '../js/chai',
+            'sinon': '../js/sinon',
             'mocha': '../js/mocha',
-            'module.login': '../../public/js/app/module.login'
+            'module.login': '../js/app/module.login'
         },
         shim: {
             'amplify': ['jquery'],
@@ -31,20 +32,26 @@
                 init: function () {
                     this.mocha.setup('bdd');
                     return this.mocha;
-                }
+                },
+                deps: [
+                    'jquery',
+                    'chai',
+                    'sinon'
+                ],
+                exports: "mocha"
             }
         }
     });
 </script>
 
-<!-- Tests with or without require magic -->
 <script type="text/javascript" charset="utf-8">
     require([
-        "mocha",
         "chai",
+        "mocha",
+        "sinon",
         "module.login.spec"
-    ], function (mocha, chai) {
-        expect = chai.expect;
+    ], function (chai, mocha) {
+        window.expect = chai.expect;
         if (navigator.userAgent.indexOf('PhantomJS') < 0) {
             mocha.run();
         }

@@ -1,4 +1,4 @@
-define('module.login.spec',['mocha','module.login', 'amplify'],function(mocha,Login,amplify){
+define(['module.login', 'amplify'],function(Login,amplify){
     "use strict";
 
     describe("Login module",function(){

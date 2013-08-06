@@ -106,9 +106,13 @@ module.exports = function (grunt) {
                 }
             },
             mocha: {
-                all: ['tests/**/*.html'],
-                options:{
-                    run:true
+                index: ["http://localhost:10001/tests/module.login.html"]
+            },
+            connect:{
+                test:{
+                    options:{
+                        port:10001
+                    }
                 }
             },
             copy: {
@@ -121,7 +125,8 @@ module.exports = function (grunt) {
                         {expand: true, flatten: true, src: ['public/js/libs/requirejs/require.js'], dest: 'tests/js/' },
                         {expand: true, flatten: true, src: ['public/js/libs/jquery/jquery.js'], dest: 'tests/js/' },
                         {expand: true, flatten: true, src: ['public/js/libs/amplify/lib/amplify.js'], dest: 'tests/js/' },
-                        {expand: true, flatten:true, src:['node_modules/grunt-mocha/phantomjs/bridge.js'], dest : 'tests/js'}
+                        {expand: true, flatten: true, src: ['node_modules/grunt-mocha/phantomjs/bridge.js'], dest: 'tests/js'},
+                        {expand: true, flatten: true, src: ['public/js/app/module.*.js'], dest: 'tests/js/app'}
                     ]
                 }
             }
@@ -136,7 +141,9 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-markdown');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-connect');
 
     grunt.registerTask('default', [ 'less:dev', 'jshint:all', 'copy', 'connect:server', 'mocha', 'markdown', 'concurrent']);
+    grunt.registerTask('test',['connect:test','mocha']);
 }
 ;
