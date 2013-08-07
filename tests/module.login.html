@@ -5,13 +5,14 @@
     <title>Module.login mocha testst</title>
     <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8"/>
     <script src="js/mocha.js" type="text/javascript" charset="utf-8"></script>
-
 </head>
 <body>
 <div id="mocha"></div>
 
 <!-- mocha -->
 <script src="js/require.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="js/bridge.js" type="text/javascript" char
 
 <script type="text/javascript" charset="utf-8">
     // Setup require
@@ -23,32 +24,30 @@
             'jquery': '../js/jquery',
             'chai': '../js/chai',
             'sinon': '../js/sinon',
-            'mocha': '../js/mocha',
             'module.login': '../js/app/module.login'
         },
         shim: {
-            'amplify': ['jquery'],
-            'mocha': {
-                init: function () {
-                    this.mocha.setup('bdd');
-                    return this.mocha;
-                },
-                deps: [
-                    'jquery',
-                    'chai',
-                    'sinon'
-                ],
-                exports: "mocha"
-            }
+            'amplify': ['jquery']
         }
+    })
+    ;
+
+    define("mocha", ["chai", "sinon", "jquery"], function () {
+        mocha.setup({
+            ui: 'bdd',
+            ignoreLeaks: true
+        });
+        return window.mocha;
     });
+
+    console.log(navigator.userAgent);
+
 </script>
 
 <script type="text/javascript" charset="utf-8">
     require([
         "chai",
         "mocha",
-        "sinon",
         "module.login.spec"
     ], function (chai, mocha) {
         window.expect = chai.expect;

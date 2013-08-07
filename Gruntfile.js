@@ -106,12 +106,16 @@ module.exports = function (grunt) {
                 }
             },
             mocha: {
-                index: ["http://localhost:10001/tests/module.login.html"]
+                index: ["http://localhost:10001/tests/module.login.html"],
+                options: {
+                    run: true
+                }
             },
-            connect:{
-                test:{
-                    options:{
-                        port:10001
+            connect: {
+                test: {
+                    options: {
+                        port: 10001,
+                        keepalive:true
                     }
                 }
             },
@@ -144,6 +148,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-connect');
 
     grunt.registerTask('default', [ 'less:dev', 'jshint:all', 'copy', 'connect:server', 'mocha', 'markdown', 'concurrent']);
-    grunt.registerTask('test',['connect:test','mocha']);
+    grunt.registerTask('test', ['connect:test', 'mocha']);
 }
 ;
