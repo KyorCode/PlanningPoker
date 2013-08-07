@@ -19,5 +19,5 @@ define(['module.login', 'amplify'], function (Login, amplify) {
                 expect(this.loginModule.getName()).to.equal('Tom');
             });
         });
-    })
+    });
 });

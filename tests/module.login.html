@@ -11,7 +11,7 @@
 
 <!-- mocha -->
 <script src="js/require.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="js/bridge.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
     // Setup require
     requirejs.config({
@@ -38,8 +38,6 @@
         return window.mocha;
     });
 
-    console.log(navigator.userAgent);
-
 </script>
 
 <script type="text/javascript" charset="utf-8">
@@ -49,9 +47,8 @@
         "module.login.spec"
     ], function (chai, mocha) {
         window.expect = chai.expect;
-        if (navigator.userAgent.indexOf('PhantomJS') < 0) {
             mocha.run();
-        }
+
     })
 </script>
 

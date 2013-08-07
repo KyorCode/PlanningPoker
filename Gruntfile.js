@@ -12,7 +12,7 @@ module.exports = function (grunt) {
                 }
             },
             jshint: {
-                all: ['Gruntfile.js', 'app.js', 'public/js/*.js', 'tests/**/*.js'],
+                all: ['app.js', 'public/js/*.js', 'tests/spec/*.js'],
                 options: {
                     curly: true,
                     eqeqeq: true,
@@ -24,16 +24,17 @@ module.exports = function (grunt) {
                     undef: true,
                     boss: true,
                     eqnull: true,
-                    browser: true
-                },
-                globals: {
-                    require: true,
-                    define: true,
-                    requirejs: true,
-                    describe: true,
-                    expect: true,
-                    it: true
-                }
+                    browser: true,
+                    globals: {
+                        require: true,
+                        define: true,
+                        requirejs: true,
+                        describe: true,
+                        expect: true,
+                        it: true,
+                        afterEach: true,
+                        beforeEach: true
+                    }}
             },
             less: {
                 dev: {
@@ -58,7 +59,7 @@ module.exports = function (grunt) {
             watch: {
                 html: {
                     files: ['views/*.html'],
-                    tasks: ['less:dev', 'jshint:all'],
+                    tasks: ['less:dev', 'jshint:all', 'mocha'],
                     options: {
                         nospawn: true,
                         livereload: true
@@ -66,7 +67,7 @@ module.exports = function (grunt) {
                 },
                 css: {
                     files: ['styles/*.less'],
-                    tasks: ['less:dev'],
+                    tasks: ['less:dev', 'mocha'],
                     options: {
                         nospawn: true,
                         livereload: true
@@ -74,14 +75,14 @@ module.exports = function (grunt) {
                 },
                 js: {
                     files: ['public/js/*.js'],
-                    tasks: ['jshint:all'],
+                    tasks: ['jshint:all', 'mocha'],
                     options: {
                         nospawn: true,
                         livereload: true
                     }
                 }, tests: {
                     files: ['tests/**/*.js'],
-                    tasks: ['jshint:all'],
+                    tasks: ['jshint:all', 'mocha'],
                     options: {
                         nospawn: true,
                         livereload: true
@@ -106,17 +107,9 @@ module.exports = function (grunt) {
                 }
             },
             mocha: {
-                index: ["http://localhost:10001/tests/module.login.html"],
+                src: ["tests/module.login.html"],
                 options: {
-                    run: true
-                }
-            },
-            connect: {
-                test: {
-                    options: {
-                        port: 10001,
-                        keepalive:true
-                    }
+                    reporter: 'Spec'
                 }
             },
             copy: {
@@ -145,9 +138,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-markdown');
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-connect');
 
-    grunt.registerTask('default', [ 'less:dev', 'jshint:all', 'copy', 'connect:server', 'mocha', 'markdown', 'concurrent']);
-    grunt.registerTask('test', ['connect:test', 'mocha']);
+    grunt.registerTask('default', [ 'less:dev', 'jshint:all', 'copy', 'mocha', 'markdown', 'concurrent']);
+    grunt.registerTask('test', ['mocha']);
 }
 ;

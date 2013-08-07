@@ -7,28 +7,18 @@ var express = require('express'),
     pub = __dirname + '/public',
     doT = require('express-dot');
 
-
-app.set('views', view);
-app.set('view engine', 'doT');
-app.engine('html', doT.__express);
-app.use(express.bodyParser());
-app.locals.layout = false;
-app.use(express.static(pub));
-app.use(logErrors);
-app.use(clientErrorHandler);
-app.use(errorHandler);
-app.use(app.router);
-
 function logErrors(err, req, res, next) {
     console.error(err.stack);
     next(err);
 }
 
 function clientErrorHandler(err, req, res, next) {
-    if (req.xhr)
+    if (req.xhr) {
         res.send(500, {error: 'You killed it!'});
-    else
+    }
+    else {
         next(err);
+    }
 }
 
 function errorHandler(err, req, res, next) {
@@ -56,6 +46,18 @@ server.listen(port, function () {
 });
 
 app.get('/', function (req, res) {
-    var templateData = {title:"test"};
+    var templateData = {title: "test"};
     res.render('index.html', templateData);
 });
+
+
+app.set('views', view);
+app.set('view engine', 'doT');
+app.engine('html', doT.__express);
+app.use(express.bodyParser());
+app.locals.layout = false;
+app.use(express.static(pub));
+app.use(logErrors);
+app.use(clientErrorHandler);
+app.use(errorHandler);
+app.use(app.router);

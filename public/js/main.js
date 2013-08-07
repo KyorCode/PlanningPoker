@@ -1,4 +1,4 @@
-PlanningPoker = (function () {
+var PlanningPoker = (function () {
     var root = this;
 
     requirejs.config({
