@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Module.poker mocha testst</title>
+    <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8"/>
+    <script src="js/mocha.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+<div id="mocha"></div>
+
+<!-- mocha -->
+<script src="js/require.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/bridge.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+    // Setup require
+    requirejs.config({
+        urlArgs: "bust=" + (new Date()).getTime(),
+        baseUrl: 'spec',
+        paths: {
+            'amplify': '../js/amplify',
+            'jquery': '../js/jquery',
+            'chai': '../js/chai',
+            'sinon': '../js/sinon',
+            'module.poker': '../js/app/module.poker'
+        },
+        shim: {
+            'amplify': ['jquery']
+        }
+    })
+    ;
+
+    define("mocha", ["chai", "sinon", "jquery"], function () {
+        mocha.setup({
+            ui: 'bdd',
+            ignoreLeaks: true
+        });
+        return window.mocha;
+    });
+
+</script>
+
+<script type="text/javascript" charset="utf-8">
+    require([
+        "chai",
+        "mocha",
+        "module.poker.spec"
+    ], function (chai, mocha) {
+        window.expect = chai.expect;
+        mocha.run();
+    })
+</script>
+
+</body>
+</html>

@@ -25,6 +25,8 @@ module.exports = function (grunt) {
                     boss: true,
                     eqnull: true,
                     browser: true,
+                    node:true,
+                    phantom:true,
                     globals: {
                         require: true,
                         define: true,
@@ -82,7 +84,7 @@ module.exports = function (grunt) {
                     }
                 }, tests: {
                     files: ['tests/**/*.js'],
-                    tasks: ['jshint:all', 'mocha'],
+                    tasks: ['jshint:all', 'copy', 'mocha'],
                     options: {
                         nospawn: true,
                         livereload: true
@@ -107,7 +109,7 @@ module.exports = function (grunt) {
                 }
             },
             mocha: {
-                src: ["tests/module.login.html"],
+                src: ["tests/*.html"],
                 options: {
                     reporter: 'Spec'
                 }
@@ -140,6 +142,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
 
     grunt.registerTask('default', [ 'less:dev', 'jshint:all', 'copy', 'mocha', 'markdown', 'concurrent']);
-    grunt.registerTask('test', ['mocha']);
+    grunt.registerTask('test', ['copy', 'mocha', 'watch:tests']);
 }
 ;
