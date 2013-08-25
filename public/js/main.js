@@ -5,7 +5,8 @@ var PlanningPoker = (function () {
         baseUrl: './js/app',
         paths:{
             'amplify':'.libs/amplify/lib/amplify',
-            'jquery':'.libs/jquery/jquery'
+            'jquery':'.libs/jquery/jquery',
+            'socket.io':'/socket.io/socket.io'
         },
         shim:{
             'amplify':['jquery']

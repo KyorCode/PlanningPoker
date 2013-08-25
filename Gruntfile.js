@@ -9,6 +9,12 @@ module.exports = function (grunt) {
                     options: {
                         logConcurrentOutput: true
                     }
+                },
+                tests:{
+                    tasks:['nodemon:dev','mocha','watch:tests'],
+                    options:{
+                        logConcurrentOutput:true
+                    }
                 }
             },
             jshint: {
@@ -141,7 +147,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-contrib-copy');
 
-    grunt.registerTask('default', [ 'less:dev', 'jshint:all', 'copy', 'mocha', 'markdown', 'concurrent']);
-    grunt.registerTask('test', ['copy', 'mocha', 'watch:tests']);
+    grunt.registerTask('default', [ 'less:dev',
+        'jshint:all',
+        'copy',
+        'mocha',
+        'markdown',
+        'concurrent']);
+    grunt.registerTask('test', ['copy', 'concurrent:tests']);
 }
 ;

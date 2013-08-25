@@ -1,4 +1,4 @@
-define('bootstrap',[],function(){
+define('bootstrap',['module.poker'],function(){
 
     var run = function(){
 

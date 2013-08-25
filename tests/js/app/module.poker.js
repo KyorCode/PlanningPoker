@@ -1,4 +1,4 @@
-define('module.poker', [], function () {
+define('module.poker', ['socket.io'], function (io) {
 
     function Poker(){
     };
