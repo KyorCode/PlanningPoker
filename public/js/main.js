@@ -14,7 +14,7 @@ var PlanningPoker = (function () {
     });
 
     function boot() {
-        require(["bootstrap"], function (bs) {
+        require(["bootstrapper"], function (bs) {
             bs.run();
         });
     }

@@ -1,4 +1,4 @@
-define(['module.login', 'amplify'], function (Login, amplify) {
+define(['Login', 'amplify'], function (Login, amplify) {
     "use strict";
 
     describe("Login module", function () {

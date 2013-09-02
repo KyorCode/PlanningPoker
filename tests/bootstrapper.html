@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Module.poker mocha testst</title>
+    <title>Module.login mocha testst</title>
     <link rel="stylesheet" href="css/mocha.css" type="text/css" charset="utf-8"/>
     <script src="js/mocha.js" type="text/javascript" charset="utf-8"></script>
 </head>
@@ -22,8 +22,11 @@
             'jquery': '../js/jquery',
             'chai': '../js/chai',
             'sinon': '../js/sinon',
-            'module.poker': '../js/app/module.poker',
-            'socket.io':'http://localhost:35728/socket.io/socket.io.js'
+            'bootstrapper': '../js/app/bootstrapper',
+            'Overrides': '../js/app/overrides',
+            'poker': '../js/app/poker',
+            'socket.io': 'http://localhost:35728/socket.io/socket.io.js'
+
         },
         shim: {
             'amplify': ['jquery']
@@ -45,10 +48,11 @@
     require([
         "chai",
         "mocha",
-        "module.poker.spec"
+        "bootstrapper.spec"
     ], function (chai, mocha) {
         window.expect = chai.expect;
         mocha.run();
+
     })
 </script>
 

@@ -131,7 +131,7 @@ module.exports = function (grunt) {
                         {expand: true, flatten: true, src: ['public/js/libs/jquery/jquery.js'], dest: 'tests/js/' },
                         {expand: true, flatten: true, src: ['public/js/libs/amplify/lib/amplify.js'], dest: 'tests/js/' },
                         {expand: true, flatten: true, src: ['node_modules/grunt-mocha/phantomjs/bridge.js'], dest: 'tests/js'},
-                        {expand: true, flatten: true, src: ['public/js/app/module.*.js'], dest: 'tests/js/app'}
+                        {expand: true, flatten: true, src: ['public/js/app/*.js'], dest: 'tests/js/app'}
                     ]
                 }
             }

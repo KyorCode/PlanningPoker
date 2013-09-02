@@ -1,4 +1,4 @@
-define('module.login', ['amplify'], function (amplify) {
+define('Login', ['amplify'], function (amplify) {
 
     function Login(name){
         this._name = name;

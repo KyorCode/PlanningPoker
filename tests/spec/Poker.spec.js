@@ -1,4 +1,4 @@
-define(['module.poker', 'socket.io'], function (Poker, io) {
+define(['Poker', 'socket.io'], function (Poker, io) {
     "use strict";
 
     var socketUrl = 'http://localhost:35728';
